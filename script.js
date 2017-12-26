@@ -1,4 +1,4 @@
-/ Code goes here
+// Code goes here
 
 var todoList = {
   todos: [],
@@ -16,7 +16,6 @@ var todoList = {
       }
     }
   },
-
   addTodo: function(todoText) {
     this.todos.push({
       todoText: todoText,
@@ -50,12 +49,12 @@ var todoList = {
 
     // Case 1: If everything's true, make everything false.
     if (completedTodos === totalTodos) {
-      for (var i = 0; i < totalTodos; i++) {
+      for (let i = 0; i < totalTodos; i++) {
         this.todos[i].completed = false
       }
     // Case 2: Otherwise, make everything true.
     } else {
-      for (var i = 0; i < totalTodos; i++) {
+      for (let i = 0; i < totalTodos; i++) {
         this.todos[i].completed = true
       }
     }
@@ -63,16 +62,16 @@ var todoList = {
   }
 }
 
-// 1. We want to get access to the display todos button.
-var displayTodosButton = document.getElementById('displayTodosButton')
-var toggleAllButton = document.getElementById('toggleAllButton')
-
-// 2. WE want to run displayTodos methods, when someone clicks the display
-// todos button.
-displayTodosButton.addEventListener('click', function(){
-  todoList.displayTodos()
-})
-
-toggleAllButton.addEventListener('click', function(){
-  todoList.toggleAll()
-})
+var handlers = {
+  displayTodos: function(){
+    todoList.displayTodos()
+  },
+  toggleAll: function() {
+    todoList.toggleAll()
+  },
+  addTodo: function(){
+    var addTodoTextInput = document.getElementById('addTodoTextInput')
+    todoList.addTodo(addTodoTextInput.value)
+    addTodoTextInput.value = ''
+  }
+}
