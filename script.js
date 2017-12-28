@@ -41,7 +41,7 @@ var todoList = {
     var completedTodos = 0
 
     // Get number of completed todos.
-    for (var i = 0; i < totalTodos; i++) {
+    for (let i = 0; i < totalTodos; i++) {
       if (this.todos[i].completed === true) {
         completedTodos++
       }
@@ -66,12 +66,52 @@ var handlers = {
   displayTodos: function(){
     todoList.displayTodos()
   },
-  toggleAll: function() {
-    todoList.toggleAll()
-  },
   addTodo: function(){
     var addTodoTextInput = document.getElementById('addTodoTextInput')
     todoList.addTodo(addTodoTextInput.value)
     addTodoTextInput.value = ''
+  },
+  changeTodo: function(){
+    var changeTodoPositionInput = document.getElementById('changeTodoPositionInput')
+    var changeTodoTextInput = document.getElementById('changeTodoTextInput')
+    todoList.changeTodo(changeTodoPositionInput.valueAsNumber, changeTodoTextInput.value)
+    changeTodoPositionInput.value =''
+    changeTodoTextInput.value = ''
+  },
+  deleteTodo: function(){
+    var deleteTodoPositionInput = document.getElementById('deleteTodoPositionInput')
+    todoList.deleteTodo(deleteTodoPositionInput.valueAsNumber)
+    deleteTodoPositionInput.value = ''
+  },
+  toggleCompleted: function() {
+    var toggleCompletedPositionInput = document.getElementById('toggleCompletedPositionInput')
+    todoList.toggledCompleted(toggleCompletedPositionInput.valueAsNumber)
+    toggleCompletedPositionInput.value = ''
+  },
+  toggleAll: function() {
+    todoList.toggleAll()
+  }
+}
+// Render the todo list to the display.
+var view = {
+  displayTodos: function() {
+     // 1. First, find `ul' element which we defined in our `index.html` file.
+     var todosUl = document.querySelector('ul')
+     // 2. Clear all elements within the child of `ul` before re-drawing all todos.
+     todosUl.innerHTML = ''
+    for (let i = 0; i<todoList.todos.length; i++){
+      // 3. Create an `li` element.
+      var todoLi = document.createElement('li')
+
+
+
+
+
+
+      // 4. Set the todos text property of each array to each `li` element iteratively.
+      todoLi.textContent = todoList.todos[i].todoText
+      // 5. Add a child element, in this case the `li` element, to the `ul' element.
+      todosUl.appendChild(todoLi)
+    }
   }
 }
